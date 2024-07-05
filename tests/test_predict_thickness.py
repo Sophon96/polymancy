@@ -12,4 +12,4 @@ model.train(X, y)
 MW = 192000  # example molecular weight in Daltons
 C = 20  # example concentration in mg/mL
 predicted_thickness = model.predict_thickness(MW, C)
-print(f"Predicted thickness: {predicted_thickness} Å")
+print(f"Predicted thickness: {predicted_thickness} nm")

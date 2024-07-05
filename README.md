@@ -40,3 +40,5 @@ python test/test_predict_thickness.py
 ```
 
 You can also load and preprocess the data using the `load_data` and `preprocess_data` functions in the `polymancy.utils` module. However, toy with this as you see fit.
+
+Note: Preprocessing automatically converts the units of the data to nm, as per previous versions of the [method](https://github.com/EvX57/SpinCoating/blob/main/model.py) developed by Evan Xie and his team.
