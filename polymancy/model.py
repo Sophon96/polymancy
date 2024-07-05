@@ -1,6 +1,11 @@
 from sklearn.linear_model import Ridge
 from sklearn.preprocessing import PolynomialFeatures
-from sklearn.model_selection import train_test_split, cross_val_score, GridSearchCV
+from sklearn.model_selection import (
+    train_test_split,
+    cross_val_score,
+    GridSearchCV,
+    LeaveOneOut,
+)
 from sklearn.metrics import mean_squared_error
 
 
@@ -10,13 +15,15 @@ class PolyFilmModel:
     and molecular weight.
     """
 
-    def __init__(self):
+    def __init__(self, degree=2):
         """
         Initialize the PolyFilmModel.
+
+        Parameters:
+        degree (int): The degree of the polynomial features.
         """
         self.model = None
-        self.inverse_model = None
-        self.poly = PolynomialFeatures(degree=2)
+        self.poly = PolynomialFeatures(degree=degree)
 
     def train(self, x_data, y_data):
         """
@@ -38,7 +45,7 @@ class PolyFilmModel:
         ridge = Ridge()
         params = {"alpha": [0.1, 1.0, 10.0, 100.0]}
         grid_search = GridSearchCV(
-            ridge, param_grid=params, scoring="neg_mean_squared_error", cv=5
+            ridge, param_grid=params, scoring="neg_mean_squared_error", cv=LeaveOneOut()
         )
         grid_search.fit(x_train, y_train)
 
@@ -78,6 +85,10 @@ class PolyFilmModel:
         """
         x_poly = self.poly.transform(x_data)
         scores = cross_val_score(
-            self.model, x_poly, y_data, cv=5, scoring="neg_mean_squared_error"
+            self.model,
+            x_poly,
+            y_data,
+            cv=LeaveOneOut(),
+            scoring="neg_mean_squared_error",
         )
-        return -scores.mean(), -scores.std()
+        return -scores.mean(), scores.std()
