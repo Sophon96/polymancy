@@ -10,17 +10,7 @@
 - Grid search and cross-validation to optimize model parameters and improve prediction accuracy
 - Simple and intuitive API for integrating with existing research workflows and data analysis pipelines
 
-#### Installation
-
-```bash
-pip install polymancy
-```
-
-#### How to use
-
-Sure, here's a comprehensive "How to Use" section for the `PolyFilmModel` package:
-
-#### For students
+#### Usage
 
 I recommend running this locally, as it's easier to customize and test. Here's a step-by-step guide to get you started:
 
